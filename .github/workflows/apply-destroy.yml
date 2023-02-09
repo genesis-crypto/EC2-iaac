@@ -29,7 +29,7 @@ jobs:
       - name: terraform Apply or Destroy
         run: |
           if cd ${{ github.workspace }}/infra && grep 'destroy: true' destroy.yml ; then
-            cd ${{ github.workspace }}/infra && terraform destroy --auto-approve >> $GITHUB_ENV
+            cd ${{ github.workspace }}/infra && terraform destroy --auto-approve
           else
-            cd ${{ github.workspace }}/infra && terraform apply --auto-approve >> $GITHUB_ENV
+            cd ${{ github.workspace }}/infra && terraform apply --auto-approve
           fi
