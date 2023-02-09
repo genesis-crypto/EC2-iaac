@@ -26,8 +26,8 @@ jobs:
         run: cd ${{ github.workspace }}/infra && terraform validate
       - name: Terraform plan
         run: cd ${{ github.workspace }}/infra && terraform plan
-      - name: Pull-request branch to main
-        uses: repo-sync/pull-request@v2
+      - name: Pull-request branch to main 
+        uses: repo-sync/pull-request@v2.12.1
         with:
           destination_branch: "main"
           pr_title: "Pulling ${{ github.ref }} into main" 
