@@ -5,7 +5,7 @@ variable "private_key_path" {
 
 variable "instance_type" {
   type    = string
-  default = "t3.nano"
+  default = "t4g.nano"
   description = "The instance type from the EC2 machine"
 }
 
