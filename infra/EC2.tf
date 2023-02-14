@@ -12,14 +12,14 @@ resource "aws_instance" "ec2_3dol" {
   }  
   vpc_security_group_ids = [aws_security_group.sg_ec2_3dol.id]
   
-  connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    private_key = file("./path/to/my_key_pair.pem")
-    host        = self.public_ip
-  }
-  
   provisioner "remote-exec" {
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file(var.private_key_path)
+      host        = self.public_ip
+    }
+
     inline = [
       "sudo amazon-linux-extras install nginx1.12",
       "sudo systemctl start nginx",
