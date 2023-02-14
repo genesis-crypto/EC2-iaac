@@ -17,12 +17,12 @@ data "aws_ami" "ubuntu" {
 
 resource "aws_instance" "ec2_3dol" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.nano"
-  key_name      = "my_key_pair"
+  instance_type = var.instance_type
 
   tags = {
-    Name = "ec2_3dol"
-  }  
+    Name = var.instance_name
+  }
+
   vpc_security_group_ids = [aws_security_group.sg_ec2_3dol.id]
   
   provisioner "remote-exec" {
