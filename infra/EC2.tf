@@ -15,7 +15,7 @@ resource "aws_instance" "ec2_3dol" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("/path/to/my_key_pair.pem")
+    private_key = file("./path/to/my_key_pair.pem")
     host        = self.public_ip
   }
   
