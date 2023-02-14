@@ -29,7 +29,9 @@ jobs:
       - name: terraform Apply or Destroy
         run: |
           if cd ${{ github.workspace }}/infra && grep 'destroy: true' destroy.yml ; then
-            cd ${{ github.workspace }}/infra && terraform destroy --auto-approve
+            echo "going to delete resource"
+            cd ${{ github.workspace }}/infra && terraform destroy
           else
-            cd ${{ github.workspace }}/infra && terraform apply --auto-approve
+            echo "going to create resource"
+            cd ${{ github.workspace }}/infra && terraform apply
           fi
