@@ -10,7 +10,7 @@ resource "aws_instance" "ec2_3dol" {
   tags = {
     Name = "ec2_3dol"
   }  
-  vpc_security_group_ids = [aws_security_group.example.id]
+  vpc_security_group_ids = [aws_security_group.sg_ec2_3dol.id]
   
   connection {
     type        = "ssh"
