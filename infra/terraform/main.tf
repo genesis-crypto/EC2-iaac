@@ -1,6 +1,7 @@
 module "ec2_instance" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   name = var.instance_name
+  key_name = aws_key_pair.server.key_name
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   monitoring             = true
