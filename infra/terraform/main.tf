@@ -5,7 +5,7 @@ module "ec2_instance" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   monitoring             = true
-  vpc_security_group_ids = [aws_security_group.sg_ec2_3dol.id]
+  vpc_security_group_ids = [aws_security_group.sg_ec2_3dol.id, aws_security_group.ssh.id]
 
   tags = {
     Terraform   = "true"
