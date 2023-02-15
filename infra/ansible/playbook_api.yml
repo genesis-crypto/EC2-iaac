@@ -1,0 +1,83 @@
+---
+- hosts: your_ec2_instance
+  become: true
+
+  vars:
+    db_name: your_db_name
+    db_user: your_db_user
+    db_password: your_db_password
+
+  tasks:
+
+  - name: Update apt cache
+    apt:
+      update_cache: yes
+
+  - name: Install NGINX
+    apt:
+      name: nginx
+      state: present
+
+  - name: Configure NGINX
+    copy:
+      src: nginx.conf
+      dest: /etc/nginx/nginx.conf
+    notify: restart nginx
+
+  - name: Install Node.js and NPM
+    apt:
+      name: npm
+      state: present
+
+  - name: Install PM2 process manager for Node.js
+    npm:
+      name: pm2
+      global: yes
+
+  - name: Clone the Node.js API repository
+    git:
+      repo: your_node_js_api_repo
+      dest: /opt/node-api
+
+  - name: Install Node.js API dependencies
+    npm:
+      cwd: /opt/node-api
+
+  - name: Start the Node.js API using PM2
+    command: pm2 start index.js --name node-api
+    args:
+      chdir: /opt/node-api
+
+  - name: Install MySQL client and server
+    apt:
+      name: mysql-client, mysql-server
+      state: present
+
+  - name: Configure MySQL
+    copy:
+      src: mysql.cnf
+      dest: /etc/mysql/mysql.conf.d/mysqld.cnf
+    notify: restart mysql
+
+  - name: Create MySQL database
+    mysql_db:
+      name: "{{ db_name }}"
+      state: present
+
+  - name: Create MySQL user
+    mysql_user:
+      name: "{{ db_user }}"
+      password: "{{ db_password }}"
+      priv: "{{ db_name }}.*:ALL"
+      host: localhost
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: restart mysql
+      service:
+        name: mysql
+        state: restarted
