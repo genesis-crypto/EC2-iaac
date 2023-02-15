@@ -51,4 +51,4 @@ jobs:
 
       - name: Run ansible-playbook
         if: ${{ env.RUN_ANSIBLE == 'true' }}
-        run: cd ${{ github.workspace }}/infra/ansible && ansible-playbook playbook_api.yml
+        run: cd ${{ github.workspace }}/infra/ansible && ansible-playbook playbook_api.yaml
