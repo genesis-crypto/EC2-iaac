@@ -11,3 +11,8 @@ module "ec2_instance" {
     Environment = "dev"
   }
 }
+
+resource "aws_eip" "ec2_eip" {
+  instance = module.ec2_instance.id
+  vpc      = true
+}
