@@ -35,10 +35,10 @@ jobs:
         run: |
           if cd ${{ github.workspace }}/infra/terraform && grep 'destroy: true' destroy.yml ; then
             echo "going to delete resource"
-            cd ${{ github.workspace }}/infra/terraform && terraform destroy --auto-approve
+            cd ${{ github.workspace }}/infra/terraform && terraform destroy --auto-approve && echo "RUN_ANSIBLE=false" >> $GITHUB_ENV
           else
             echo "going to create resource"
-            cd ${{ github.workspace }}/infra/terraform && terraform apply --auto-approve
+            cd ${{ github.workspace }}/infra/terraform && terraform apply --auto-approve && echo "RUN_ANSIBLE=true" >> $GITHUB_ENV
           fi
 
       - name: Install Ansible
