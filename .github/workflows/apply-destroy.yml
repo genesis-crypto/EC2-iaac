@@ -30,8 +30,8 @@ jobs:
         run: |
           if cd ${{ github.workspace }}/infra && grep 'destroy: true' destroy.yml ; then
             echo "going to delete resource"
-            cd ${{ github.workspace }}/infra && terraform destroy -var 'aws_region=us-east-1'
+            cd ${{ github.workspace }}/infra && terraform destroy --auto-approve
           else
             echo "going to create resource"
-            cd ${{ github.workspace }}/infra && terraform apply
+            cd ${{ github.workspace }}/infra && terraform apply --auto-approve
           fi
