@@ -1,3 +1,8 @@
+variable "aws_region" {
+  type    = string
+  default = "us-east-1"
+}
+
 variable "private_key_path" {
   type    = string
   default = "/usr/my_key.pem"
