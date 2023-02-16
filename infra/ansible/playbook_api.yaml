@@ -1,5 +1,5 @@
 ---
-- hosts: your_ec2_instance
+- hosts: ec2
   become: true
 
   vars:
