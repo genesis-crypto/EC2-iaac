@@ -16,7 +16,7 @@ resource "local_file" "ansible_hosts" {
   EOF
 }
 
-output "path.module" {
+output "path_module" {
   value       = "${path.module}"
 }
 
